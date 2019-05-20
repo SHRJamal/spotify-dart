@@ -14,14 +14,18 @@ class Playlists extends EndpointPaging {
         '$_path/featured-playlists',
         (json) => PlaylistSimple.fromJson(json),
         'playlists',
-        (json) => PlaylistsFeatured.fromJson(json));
+        (json) => PlaylistsFeatured.fromJson(json),
+        );
   }
 
   Future<PlaylistSimple> get(String id) async {
+    print("Path $_path");
+
     var jsonString = await _get('$_path/$id');
+    print("Get Playlist $jsonString");
+
     var map = json.decode(jsonString);
 
-    print("Get Playlist $map");
     return PlaylistSimple.fromJson(map);
   }
 
